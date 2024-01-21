@@ -33,16 +33,20 @@ const createContact = async(req, res) => {
 
 };
 
-const updateContact = async(req, res) => {
-
-    const isReqBody = Object.keys(req.body).length !== 0;
-    if (!isReqBody) {
-      throw RequestError(400, "Missing fields");
+const updateContact = async (req, res) => {
+    try {
+      const isReqBody = Object.keys(req.body).length !== 0;
+      if (!isReqBody) {
+        throw new HttpError(400, "Missing fields");
+      }
+      const { contactId } = req.params;
+      const result = await contacts.updateContact(contactId, req.body);
+      result ? res.status(200).json(result) : new HttpError(404, "Not found");
+    } catch (error) {
+      console.error(error);
+      res.status(error.statusCode || 500).json({ message: error.message || "Internal Server Error" });
     }
-    const { contactId } = req.params;
-    const result = await contacts.updateContact(contactId, req.body);
-    result ? res.status(200).json(result) : HttpError(404, "Not found");
-};
+  };
 
 
 module.exports ={
