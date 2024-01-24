@@ -7,3 +7,4 @@ export const createContactSchema = Joi.object({
 export const updateContactSchema = Joi.object({
 
 })
+
