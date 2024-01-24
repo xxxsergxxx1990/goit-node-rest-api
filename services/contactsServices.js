@@ -19,7 +19,7 @@ async function getContactById(contactId) {
   return contactById || null;
 }
 
-async function addContact(name, email, phone) {
+async function addContact({name, email, phone}) {
   try {
     const contacts = await listContacts();
     const newContact = {
