@@ -48,6 +48,7 @@ const updateContact = async (contactId, body) => {
   return contacts[index];
 };
 
+
 module.exports = {
   listContacts,
   getContactById,
